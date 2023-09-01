@@ -11,7 +11,11 @@ int main (){
         {40, 41, 42, 43, 44}
     };
 
-    print_matrix (stdout, (int *) mtx, 5, 5);
+    int *multiplication_result = multiply_matrices ((int *)mtx, (int *)mtx, 5);
+
+    print_matrix (stdout, multiplication_result, 5, 5);
+
+    free (multiplication_result);
 
     return 0;
 }

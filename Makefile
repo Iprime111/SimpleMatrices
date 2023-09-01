@@ -9,7 +9,7 @@ objects = $(addprefix $(buildDir)/, $(sources:.cpp=.o))
 target = SimpleMatrixes
 
 
-.PHONY: all clean prepare
+.PHONY: all clean prepare build_docs
 
 all: prepare $(target)
 
@@ -27,3 +27,6 @@ prepare:
 clean:
 	rm -f $(buildDir)/*.o all
 	rm -f $(buildDir)/$(target)
+
+build_docs:
+	doxygen Doxyfile

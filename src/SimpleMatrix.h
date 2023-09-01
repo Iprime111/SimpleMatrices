@@ -2,6 +2,7 @@
 #define SIMPLEMATRIX_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 const size_t MATRIX_SIZE_X = 5,
              MATRIX_SIZE_Y = 5;
@@ -30,7 +31,26 @@ void print_matrix (FILE *stream, const int *matrix, size_t sizeY, size_t sizeX);
 */
 void print_x_axis (FILE *stream, size_t sizeX);
 
-int *multiply_matrixes (const int *a_matrix, const int *b_matrix, size_t sizeX, size_t sizeY);
+/*!
+    @brief Multiplies two square matrices
+    @param[in] a_matrix First matrix
+    @param[in] b_matrix Second matrix
+    @param[in] matrixSize Size of the both matrices
+    @return Pointer to dynamicly allocated memory with resulting matrix stored inside
+    @note Returned memory region must be deallocated with free ()
+*/
+int *multiply_matrices (const int *a_matrix, const int *b_matrix, size_t matrixSize);
+
+/*!
+    @brief Computes one element of the matrix for a matrix multiplication
+    @param[in] a_matrix First matrix
+    @param[in] b_matrix Second matrix
+    @param[in] matrixSize Size of the both matrices
+    @param[in] elementY Y position of an element that is being found
+    @param[in] elementX X position of an element that is being found
+    @return Value of an element of a matrix multiplication
+*/
+int get_multiplication_element (const int *a_matrix, const int *b_matrix, size_t matrixSize, size_t elementY, size_t elementX);
 
 #endif
 
