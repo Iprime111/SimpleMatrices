@@ -4,7 +4,7 @@
 int main (){
 
     PushLog (1);
-    int mtx [5][5] = {
+    int test_matrix [5][5] = {
         {0,  1,  2,  3,  4},
         {10, 11, 12, 13, 14},
         {20, 21, 22, 23, 24},
@@ -20,7 +20,7 @@ int main (){
         11, 12, 13, 14, 15
     };
 
-    int *multiplication_result = multiply_matrices ((int *)mtx, (int *)mtx, 5);
+    int *multiplication_result = multiply_matrices ((int *)test_matrix, (int *)test_matrix, 5);
 
     print_matrix (stdout, multiplication_result, 5, 5);
 
