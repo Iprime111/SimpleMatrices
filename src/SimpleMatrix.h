@@ -3,6 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+#include "../CustomAssert/CustomAssert.h"
+
+const double EPS = 1.0e-6;
 
 const size_t MATRIX_SIZE_X = 5,
              MATRIX_SIZE_Y = 5;
@@ -51,6 +56,14 @@ int *multiply_matrices (const int *a_matrix, const int *b_matrix, size_t matrixS
     @return Value of an element of a matrix multiplication
 */
 int get_multiplication_element (const int *a_matrix, const int *b_matrix, size_t matrixSize, size_t elementY, size_t elementX);
+
+/*!
+    @brief Prints triangle array in a given stream
+    @param[in] stream Output stream
+    @param[in] array Triangle array
+    @param[in] size Given array size
+*/
+void print_triangle_array (FILE *stream, const int array [], size_t size);
 
 #endif
 

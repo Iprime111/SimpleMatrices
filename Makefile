@@ -5,7 +5,10 @@ buildDir = build
 srcDir = src
 
 sources = main.cpp SimpleMatrix.cpp
-objects = $(addprefix $(buildDir)/, $(sources:.cpp=.o))
+libObjects = Logger.o CustomAssert.o ColorConsole.o
+
+srcObjects = $(sources:.cpp=.o)
+objects = $(addprefix $(buildDir)/, $(srcObjects) $(libObjects))
 target = SimpleMatrixes
 
 
@@ -13,7 +16,7 @@ target = SimpleMatrixes
 
 all: prepare $(target)
 
-$(objects): $(buildDir)/%.o: $(srcDir)/%.cpp
+$(addprefix $(buildDir)/, $(sources:.cpp=.o)): $(buildDir)/%.o: $(srcDir)/%.cpp
 	@echo [CXX] -c $< -o $@
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 

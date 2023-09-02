@@ -3,6 +3,7 @@
 
 int main (){
 
+    PushLog (1);
     int mtx [5][5] = {
         {0,  1,  2,  3,  4},
         {10, 11, 12, 13, 14},
@@ -11,11 +12,23 @@ int main (){
         {40, 41, 42, 43, 44}
     };
 
+    int triangle_array [15] = {
+        1,
+        2, 3,
+        4, 5, 6,
+        7, 8, 9, 10,
+        11, 12, 13, 14, 15
+    };
+
     int *multiplication_result = multiply_matrices ((int *)mtx, (int *)mtx, 5);
 
     print_matrix (stdout, multiplication_result, 5, 5);
 
     free (multiplication_result);
 
-    return 0;
+    puts ("\nTriangle array print:");
+
+    print_triangle_array (stdout, triangle_array, 15);
+
+    RETURN 0;
 }
