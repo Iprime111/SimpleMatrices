@@ -1,12 +1,6 @@
 #ifndef SIMPLEMATRIX_H_
 #define SIMPLEMATRIX_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-#include "../CustomAssert/CustomAssert.h"
-
 const double EPS = 1.0e-6;
 
 const size_t MATRIX_SIZE_X = 5,

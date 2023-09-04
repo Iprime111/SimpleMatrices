@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include "SimpleMatrix.h"
+#include <CustomAssert.h>
 
 int main (){
-
     PushLog (1);
-    int test_matrix [5][5] = {
+
+    const size_t test_matrix_size = 5;
+
+    int test_matrix [test_matrix_size][test_matrix_size] = {
         {0,  1,  2,  3,  4},
         {10, 11, 12, 13, 14},
         {20, 21, 22, 23, 24},
@@ -20,9 +23,9 @@ int main (){
         11, 12, 13, 14, 15
     };
 
-    int *multiplication_result = multiply_matrices ((int *)test_matrix, (int *)test_matrix, 5);
+    int *multiplication_result = multiply_matrices ((int *)test_matrix, (int *)test_matrix, test_matrix_size);
 
-    print_matrix (stdout, multiplication_result, 5, 5);
+    print_matrix (stdout, multiplication_result, test_matrix_size, test_matrix_size);
 
     free (multiplication_result);
 

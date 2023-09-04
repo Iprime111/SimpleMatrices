@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "CustomAssert.h"
 #include "SimpleMatrix.h"
 
 void print_matrix_bad (FILE *stream, const int matrix[MATRIX_SIZE_Y][MATRIX_SIZE_X]){
@@ -22,9 +27,10 @@ void print_matrix_bad (FILE *stream, const int matrix[MATRIX_SIZE_Y][MATRIX_SIZE
 void print_matrix (FILE *stream, const int *matrix, size_t sizeY, size_t sizeX){
     PushLog(2);
 
-    custom_assert (stream != NULL,               pointer_is_null, (void)0);
-    custom_assert (matrix != NULL,               pointer_is_null, (void)0);
-    custom_assert ((sizeX != 0) && (sizeY != 0), invalid_value,   (void)0);
+    custom_assert (stream != NULL, pointer_is_null, (void)0);
+    custom_assert (matrix != NULL, pointer_is_null, (void)0);
+    custom_assert (sizeX != 0,     invalid_value,   (void)0);
+    custom_assert (sizeY != 0,     invalid_value,   (void)0);
 
     print_x_axis (stream, sizeX);
 
@@ -69,15 +75,16 @@ void print_x_axis (FILE *stream, size_t sizeX){
 int *multiply_matrices (const int *a_matrix, const int *b_matrix, size_t matrixSize){
     PushLog(2);
 
-    custom_assert ((a_matrix != NULL) && (b_matrix != NULL), pointer_is_null, NULL);
-    custom_assert (matrixSize != 0,                          invalid_value,   NULL);
+    custom_assert (a_matrix != NULL, pointer_is_null, NULL);
+    custom_assert (b_matrix != NULL, pointer_is_null, NULL);
+    custom_assert (matrixSize != 0,  invalid_value,   NULL);
 
     int *out_matrix = (int *) calloc (matrixSize * matrixSize, sizeof (int));
 
     custom_assert (out_matrix != NULL, pointer_is_null, NULL);
 
     for (size_t index = 0; index < matrixSize * matrixSize; index++){
-        * (int *) ((size_t) out_matrix + index * sizeof (int)) =\
+        * (int *) ((size_t) out_matrix + index * sizeof (int)) =
             get_multiplication_element (a_matrix, b_matrix, matrixSize, index / matrixSize, index % matrixSize);
     }
 
@@ -87,9 +94,11 @@ int *multiply_matrices (const int *a_matrix, const int *b_matrix, size_t matrixS
 int get_multiplication_element (const int *a_matrix, const int *b_matrix, size_t matrixSize, size_t elementY, size_t elementX){
     PushLog(3);
 
-    custom_assert ((a_matrix != NULL) && (b_matrix != NULL),           pointer_is_null, 0);
-    custom_assert (matrixSize != 0,                                    invalid_value,   0);
-    custom_assert ((elementX < matrixSize) && (elementY < matrixSize), invalid_value,   0);
+    custom_assert (a_matrix != NULL,      pointer_is_null, 0);
+    custom_assert (b_matrix != NULL,      pointer_is_null, 0);
+    custom_assert (matrixSize != 0,       invalid_value,   0);
+    custom_assert (elementY < matrixSize, invalid_value,   0);
+    custom_assert (elementX < matrixSize, invalid_value,   0);
 
     int element = 0;
 
@@ -97,15 +106,15 @@ int get_multiplication_element (const int *a_matrix, const int *b_matrix, size_t
 
     for (size_t index = 0; index < matrixSize; index++){
         int a_element = * (int *) ((size_t) a_matrix + (index + elementY * matrixSize) * sizeof (int));
-        int b_element = * (int *) ((size_t)b_matrix + (elementX + matrixSize * index) * sizeof (int));
+        int b_element = * (int *) ((size_t) b_matrix + (elementX + matrixSize * index) * sizeof (int));
 
         element += a_element * b_element;
 
-        printf ("Multiplying A [%lu][%lu] = %d by B [%lu][%lu] = %d\n",\
+        printf ("Multiplying A [%lu][%lu] = %d by B [%lu][%lu] = %d\n",
             elementY, index, a_element, index, elementX, b_element);
     }
 
-    puts ("");
+    fputs ("\n", stdout);
 
     RETURN element;
 
